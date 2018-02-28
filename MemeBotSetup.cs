@@ -21,7 +21,7 @@ namespace MemeBotCode
             DiscordSocketClient client = new DiscordSocketClient();
             commands = new CommandService();
 
-            string token = "no pls"; //This should be in a separate file for the final build on GitHub
+            string token = "NDE4MjUyNDEzMzU1Njg3OTM3.DXiXlA.-1MsV8QDd5K19oOLpKp-CfXqyVU"; //This should be in a separate file for the final build on GitHub
 
             services = new ServiceCollection().BuildServiceProvider();
 
@@ -45,11 +45,12 @@ namespace MemeBotCode
         private async Task MessageReceived(SocketMessage messageParameter, CommandService commands, DiscordSocketClient client)
         {
             SocketUserMessage message = messageParameter as SocketUserMessage;
+            CommandContext context = new CommandContext(client, message);
             int cmdPos = 0;
 
             if (message != null && message.HasCharPrefix('!', ref cmdPos))
             {
-                CommandContext context = new CommandContext(client, message);
+                
                 IntroModule.setCommandService(commands);
                 var result = await commands.ExecuteAsync(context, cmdPos, services);
 
@@ -57,6 +58,10 @@ namespace MemeBotCode
                 {
                     await context.Channel.SendMessageAsync(result.ErrorReason);
                 }
+            }
+            else if(message!= null && message.Author.IsBot && message.Author.Id != client.CurrentUser.Id)
+            {
+                await context.Channel.SendMessageAsync($"H-h-h-hello {message.Author.Username}");
             }
         }
     }
