@@ -11,6 +11,7 @@ namespace MemeBotCode
     class MemeBotSetup
     {
         private IServiceProvider services;
+        private CommandService commands;
 
         public static void Main(string[] args)
             => new MemeBotSetup().MainAsync().GetAwaiter().GetResult();
@@ -18,9 +19,9 @@ namespace MemeBotCode
         public async Task MainAsync()
         {
             DiscordSocketClient client = new DiscordSocketClient();
-            CommandService commands = new CommandService();
+            commands = new CommandService();
 
-            string token = "token here"; //This should be in a separate file for the final build on GitHub
+            string token = "no pls"; //This should be in a separate file for the final build on GitHub
 
             services = new ServiceCollection().BuildServiceProvider();
 
@@ -49,6 +50,7 @@ namespace MemeBotCode
             if (message != null && message.HasCharPrefix('!', ref cmdPos))
             {
                 CommandContext context = new CommandContext(client, message);
+                IntroModule.setCommandService(commands);
                 var result = await commands.ExecuteAsync(context, cmdPos, services);
 
                 if(!result.IsSuccess)
