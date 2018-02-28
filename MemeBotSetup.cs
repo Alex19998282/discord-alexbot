@@ -21,7 +21,7 @@ namespace MemeBotCode
             DiscordSocketClient client = new DiscordSocketClient();
             commands = new CommandService();
 
-            string token = "NDE4MjUyNDEzMzU1Njg3OTM3.DXiXlA.-1MsV8QDd5K19oOLpKp-CfXqyVU"; //This should be in a separate file for the final build on GitHub
+            string token = "bottokenhere"; //This should be in a separate file for the final build on GitHub
 
             services = new ServiceCollection().BuildServiceProvider();
 
