@@ -41,7 +41,7 @@ namespace MemeBotCode
                 {
                     string commandInfo = "";
 
-                    commandInfo += command.Name + " - " + command.Summary;
+                    commandInfo += command.Aliases[0] + " - " + command.Summary;
                     replyString += commandInfo + "\n";
                 }
             }
